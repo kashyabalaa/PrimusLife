@@ -327,8 +327,6 @@ public partial class AddCalendar : System.Web.UI.Page
             string title = "";
             string AdminName = "";
             string AdminContact = "";
-
-
             DataSet dsAdmin = new DataSet();
             dsAdmin = sqlobj.ExecuteSP("GetAdminDetails");
             if (dsAdmin != null && dsAdmin.Tables[0].Rows.Count > 0)
@@ -336,9 +334,7 @@ public partial class AddCalendar : System.Web.UI.Page
                 AdminName = dsAdmin.Tables[0].Rows[0]["CommunityName"].ToString();
                 AdminContact = dsAdmin.Tables[0].Rows[0]["FromMobileNo"].ToString();
             }
-
             DataSet dsemail = sqlobj.ExecuteSP("SP_GetResidentMail");
-
             if (dsemail.Tables[0].Rows.Count > 0)
             {
                 tomail = dsemail.Tables[0].Rows[0]["Contactmail"].ToString();
@@ -366,7 +362,6 @@ public partial class AddCalendar : System.Web.UI.Page
                     dsmc.Dispose();
 
                     MailClass M = new MailClass();
-
                     M.EventsMail(strmcusername, strmcfromname, tomail.ToString(), touser.ToString(), touser.ToString(), EventName.ToString(), Description.ToString(),
                        fromeventdate, strmcusername.ToString(), strmcpassword.ToString(), AdminName, AdminContact, AdminContact, title);
                 }

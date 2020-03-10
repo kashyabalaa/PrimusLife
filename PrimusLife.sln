@@ -1,27 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29102.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PrimusLife_LiveSource", ".", "{DD2CF37E-82A0-4679-94E1-877A362A5316}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "PrimusLifeSpace", ".", "{94AC5E65-6820-4151-866B-15E718FE0D39}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_57759"
-		Debug.AspNetCompiler.PhysicalPath = "..\PrimusLife_LiveSource\"
+		Debug.AspNetCompiler.PhysicalPath = "..\PrimusLifeSpace\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57759\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
 		Release.AspNetCompiler.VirtualPath = "/localhost_57759"
-		Release.AspNetCompiler.PhysicalPath = "..\PrimusLife_LiveSource\"
+		Release.AspNetCompiler.PhysicalPath = "..\PrimusLifeSpace\"
 		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_57759\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"
 		Release.AspNetCompiler.Debug = "False"
 		VWDPort = "57759"
-		SlnRelativePath = "..\PrimusLife_LiveSource\"
+		SlnRelativePath = "..\PrimusLifeSpace\"
 	EndProjectSection
 EndProject
 Global
@@ -29,10 +29,13 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DD2CF37E-82A0-4679-94E1-877A362A5316}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DD2CF37E-82A0-4679-94E1-877A362A5316}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94AC5E65-6820-4151-866B-15E718FE0D39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94AC5E65-6820-4151-866B-15E718FE0D39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B6F402CF-8CE4-4597-9706-6FC13F758FBF}
 	EndGlobalSection
 EndGlobal

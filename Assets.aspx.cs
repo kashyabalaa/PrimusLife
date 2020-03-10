@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Configuration;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 using Telerik.Web.UI;
 
 public partial class Assets : System.Web.UI.Page
@@ -31,7 +28,7 @@ public partial class Assets : System.Web.UI.Page
             txtAMCend.MinDate = txtAcqon.SelectedDate.Value;
             txtdispon.MinDate = txtAcqon.SelectedDate.Value;
             txtwarrantyend.MinDate = txtAcqon.SelectedDate.Value;
-           
+
             btnUpdate.Visible = false;
             btnDelete.Visible = false;
 
@@ -68,15 +65,15 @@ public partial class Assets : System.Web.UI.Page
         try
         {
             SqlCommand cmd = new SqlCommand("GetAssetCode", con);
-            if(con.State.Equals(ConnectionState.Open))
+            if (con.State.Equals(ConnectionState.Open))
             {
                 con.Close();
             }
             con.Open();
             SqlDataReader dr = cmd.ExecuteReader();
-            if(dr.HasRows)
+            if (dr.HasRows)
             {
-                while(dr.Read())
+                while (dr.Read())
                 {
                     strID = dr["Assetcode"].ToString();
                 }
@@ -86,7 +83,7 @@ public partial class Assets : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-           
+
         }
         return strID;
     }
@@ -99,7 +96,7 @@ public partial class Assets : System.Web.UI.Page
               new SqlParameter() { ParameterName = "@i", SqlDbType = SqlDbType.Int, Value = 5 });
 
             ddlDepartment.Items.Clear();
-            
+
             if (dsDept.Tables[0].Rows.Count > 0)
             {
 
@@ -113,7 +110,7 @@ public partial class Assets : System.Web.UI.Page
 
             dsDept.Dispose();
         }
-        catch(Exception ex)
+        catch (Exception ex)
         {
             WebMsgBox.Show(ex.Message);
         }
@@ -126,14 +123,14 @@ public partial class Assets : System.Web.UI.Page
 
             if (btnSold.Text == "Sold")
             {
-                dsUsers = sqlobj.ExecuteSP("Proc_Assets", new SqlParameter() { ParameterName = "@i", Direction = ParameterDirection.Input, SqlDbType = SqlDbType.BigInt, Value = 4 });                
+                dsUsers = sqlobj.ExecuteSP("Proc_Assets", new SqlParameter() { ParameterName = "@i", Direction = ParameterDirection.Input, SqlDbType = SqlDbType.BigInt, Value = 4 });
             }
             else
             {
                 dsUsers = sqlobj.ExecuteSP("Proc_Assets", new SqlParameter() { ParameterName = "@i", Direction = ParameterDirection.Input, SqlDbType = SqlDbType.BigInt, Value = 6 });
             }
-            
-            
+
+
             if (dsUsers.Tables[0].Rows.Count > 0)
             {
                 gvAssets.DataSource = dsUsers;
@@ -176,7 +173,7 @@ public partial class Assets : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@AssetValue", txtValue.Text);
             cmd.Parameters.AddWithValue("@Count", txtCount.Text);
 
-            
+
             if (con.State.Equals(ConnectionState.Open))
             {
                 con.Close();
@@ -210,7 +207,7 @@ public partial class Assets : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@Assetmode", ddlAssetmode.SelectedValue);
             cmd.Parameters.AddWithValue("@Assettype", ddlAssettype.Text);
             cmd.Parameters.AddWithValue("@Acquiredon", txtAcqon.SelectedDate.ToString() == string.Empty ? null : txtAcqon.SelectedDate);
-            cmd.Parameters.AddWithValue("@Disposedon", txtdispon.SelectedDate.ToString() == string.Empty ? null : txtdispon.SelectedDate);  
+            cmd.Parameters.AddWithValue("@Disposedon", txtdispon.SelectedDate.ToString() == string.Empty ? null : txtdispon.SelectedDate);
             cmd.Parameters.AddWithValue("@Assetstatus", ddlAssetsts.SelectedValue);
             cmd.Parameters.AddWithValue("@Warrantyend", txtwarrantyend.SelectedDate.ToString() == string.Empty ? null : txtwarrantyend.SelectedDate);
             cmd.Parameters.AddWithValue("@AMCEnd", txtAMCend.SelectedDate.ToString() == string.Empty ? null : txtAMCend.SelectedDate);
@@ -220,7 +217,7 @@ public partial class Assets : System.Web.UI.Page
             cmd.Parameters.AddWithValue("@Department", ddlDepartment.SelectedValue == "--Select--" ? null : ddlDepartment.SelectedValue);
             cmd.Parameters.AddWithValue("@AssetValue", txtValue.Text);
             cmd.Parameters.AddWithValue("@Count", txtCount.Text);
-           
+
             if (con.State.Equals(ConnectionState.Open))
             {
                 con.Close();
@@ -230,7 +227,7 @@ public partial class Assets : System.Web.UI.Page
             con.Close();
             Clear();
             LoadUserGrid();
-           
+
             btnSave.Visible = true;
             btnDelete.Visible = false;
             btnUpdate.Visible = false;
@@ -274,7 +271,7 @@ public partial class Assets : System.Web.UI.Page
     public void Clear()
     {
         txtdesc.Text = string.Empty;
-        txtAcqon.SelectedDate = DateTime.Today;       
+        txtAcqon.SelectedDate = DateTime.Today;
         txtAMCend.SelectedDate = null;
         txtAMCRemarks.Text = string.Empty;
         txtAssetcode.Text = AssetID();
@@ -290,7 +287,7 @@ public partial class Assets : System.Web.UI.Page
         ddlDepartment.SelectedIndex = 0;
         txtCount.Text = "1";
         txtValue.Text = "0.00";
-        
+
         txtAMCend.MinDate = txtAcqon.SelectedDate.Value;
         txtdispon.MinDate = txtAcqon.SelectedDate.Value;
         txtwarrantyend.MinDate = txtAcqon.SelectedDate.Value;
@@ -326,7 +323,7 @@ public partial class Assets : System.Web.UI.Page
                 cmd.Parameters.AddWithValue("@RSN", hbtnRSN.Value);
                 SqlDataAdapter dap = new SqlDataAdapter(cmd);
                 dap.Fill(dsEdit, "temp");
-                if(dsEdit.Tables[0].Rows.Count > 0)
+                if (dsEdit.Tables[0].Rows.Count > 0)
                 {
                     txtAssetcode.Text = dsEdit.Tables[0].Rows[0]["Assetcode"].ToString();
                     txtAssetName.Text = dsEdit.Tables[0].Rows[0]["Assetname"].ToString();
@@ -338,7 +335,7 @@ public partial class Assets : System.Web.UI.Page
                     ddlAssettype.SelectedValue = dsEdit.Tables[0].Rows[0]["Assettype"].ToString();
                     if (dsEdit.Tables[0].Rows[0]["AcquiredOn"].ToString() != null && dsEdit.Tables[0].Rows[0]["AcquiredOn"].ToString() != "")
                         txtAcqon.SelectedDate = Convert.ToDateTime(dsEdit.Tables[0].Rows[0]["AcquiredOn"]);
-                    
+
                     txtAMCend.MinDate = txtAcqon.SelectedDate.Value;
                     txtdispon.MinDate = txtAcqon.SelectedDate.Value;
                     txtwarrantyend.MinDate = txtAcqon.SelectedDate.Value;
@@ -387,7 +384,7 @@ public partial class Assets : System.Web.UI.Page
         if (e.Item.Text == "Item Master")
         {
             Response.Redirect("ItemMaster.aspx");
-        }       
+        }
         if (e.Item.Text == "User Management")
         {
             Response.Redirect("~/UserManagement.aspx");
@@ -407,10 +404,10 @@ public partial class Assets : System.Web.UI.Page
     }
     protected void BtnnExcelExport_Click(object sender, EventArgs e)
     {
-        
+
         //if (gvAssets.Visible == true && gvAssets.Items.Count > 0)
         //{
-           
+
         //    gvAssets.MasterTableView.Caption = "List of Assets";
         //    gvAssets.ExportSettings.ExportOnlyData = true;
         //    gvAssets.ExportSettings.FileName = "Assets";
@@ -420,69 +417,69 @@ public partial class Assets : System.Web.UI.Page
         //}
 
 
-         SqlProcsNew sqlobj = new SqlProcsNew();
+        SqlProcsNew sqlobj = new SqlProcsNew();
 
-         DataSet dsAssets;
+        DataSet dsAssets;
 
-         if (btnSold.Text == "Sold")
-         {
-             dsAssets = sqlobj.ExecuteSP("Proc_Assets", new SqlParameter() { ParameterName = "@i", Direction = ParameterDirection.Input, SqlDbType = SqlDbType.BigInt, Value = 7 });             
-         }
-         else
-         {
-             dsAssets = sqlobj.ExecuteSP("Proc_Assets", new SqlParameter() { ParameterName = "@i", Direction = ParameterDirection.Input, SqlDbType = SqlDbType.BigInt, Value = 8 });
-         }
+        if (btnSold.Text == "Sold")
+        {
+            dsAssets = sqlobj.ExecuteSP("Proc_Assets", new SqlParameter() { ParameterName = "@i", Direction = ParameterDirection.Input, SqlDbType = SqlDbType.BigInt, Value = 7 });
+        }
+        else
+        {
+            dsAssets = sqlobj.ExecuteSP("Proc_Assets", new SqlParameter() { ParameterName = "@i", Direction = ParameterDirection.Input, SqlDbType = SqlDbType.BigInt, Value = 8 });
+        }
 
-         //DataSet dsAssets = sqlobj.ExecuteSP("Proc_Assets", new SqlParameter() { ParameterName = "@i", Direction = ParameterDirection.Input, SqlDbType = SqlDbType.BigInt, Value = 4 });
-
-
-            if (dsAssets.Tables[0].Rows.Count > 0)
-            {
-                DataGrid dg = new DataGrid();
-
-                dg.DataSource = dsAssets.Tables[0];
-                dg.DataBind();
-
-              
-
-                // THE EXCEL FILE.
-                string sFileName = "List of Assets.xls";
-                sFileName = sFileName.Replace("/", "");
+        //DataSet dsAssets = sqlobj.ExecuteSP("Proc_Assets", new SqlParameter() { ParameterName = "@i", Direction = ParameterDirection.Input, SqlDbType = SqlDbType.BigInt, Value = 4 });
 
 
-               
+        if (dsAssets.Tables[0].Rows.Count > 0)
+        {
+            DataGrid dg = new DataGrid();
 
-                // SEND OUTPUT TO THE CLIENT MACHINE USING "RESPONSE OBJECT".
-                Response.ClearContent();
-                Response.Buffer = true;
-                Response.AddHeader("content-disposition", "attachment; filename=" + sFileName);
-                Response.ContentType = "application/vnd.ms-excel";
-                EnableViewState = false;
-
-                System.IO.StringWriter objSW = new System.IO.StringWriter();
-                System.Web.UI.HtmlTextWriter objHTW = new System.Web.UI.HtmlTextWriter(objSW);
-
-                dg.HeaderStyle.Font.Bold = true;     // SET EXCEL HEADERS AS BOLD.
-                dg.RenderControl(objHTW);
+            dg.DataSource = dsAssets.Tables[0];
+            dg.DataBind();
 
 
-                //"," + strdesc.ToString() +
 
-                Response.Write("<table><tr><td>List of Assets<td></tr></table>");
-
-
-                // STYLE THE SHEET AND WRITE DATA TO IT.
-                Response.Write("<style> TABLE { border:dotted 1px #999; } " +
-                    "TD { border:dotted 1px #D5D5D5; text-align:center } </style>");
-                Response.Write(objSW.ToString());
+            // THE EXCEL FILE.
+            string sFileName = "List of Assets.xls";
+            sFileName = sFileName.Replace("/", "");
 
 
-                Response.End();
-                dg = null;
-            }
+
+
+            // SEND OUTPUT TO THE CLIENT MACHINE USING "RESPONSE OBJECT".
+            Response.ClearContent();
+            Response.Buffer = true;
+            Response.AddHeader("content-disposition", "attachment; filename=" + sFileName);
+            Response.ContentType = "application/vnd.ms-excel";
+            EnableViewState = false;
+
+            System.IO.StringWriter objSW = new System.IO.StringWriter();
+            System.Web.UI.HtmlTextWriter objHTW = new System.Web.UI.HtmlTextWriter(objSW);
+
+            dg.HeaderStyle.Font.Bold = true;     // SET EXCEL HEADERS AS BOLD.
+            dg.RenderControl(objHTW);
+
+
+            //"," + strdesc.ToString() +
+
+            Response.Write("<table><tr><td>List of Assets<td></tr></table>");
+
+
+            // STYLE THE SHEET AND WRITE DATA TO IT.
+            Response.Write("<style> TABLE { border:dotted 1px #999; } " +
+                "TD { border:dotted 1px #D5D5D5; text-align:center } </style>");
+            Response.Write(objSW.ToString());
+
+
+            Response.End();
+            dg = null;
+        }
     }
 
-    protected void chkSold_Changed(object sender,EventArgs e)
+    protected void chkSold_Changed(object sender, EventArgs e)
     {
         LoadUserGrid();
     }
@@ -494,7 +491,7 @@ public partial class Assets : System.Web.UI.Page
         txtwarrantyend.MinDate = txtAcqon.SelectedDate.Value;
     }
 
-    protected void btnSold_Click(object sender,EventArgs e)
+    protected void btnSold_Click(object sender, EventArgs e)
     {
         if (btnSold.Text == "Sold")
         {
@@ -502,7 +499,7 @@ public partial class Assets : System.Web.UI.Page
             btnSold.ToolTip = "Click here to show the assets in use";
             lblSold.Text = "Assets - Sold Out :";
             LoadUserGrid();
-           
+
         }
         else if (btnSold.Text == "In Use")
         {
@@ -510,7 +507,7 @@ public partial class Assets : System.Web.UI.Page
             btnSold.ToolTip = "Click here to show the sold out assets";
             lblSold.Text = "Assets - In Use :";
             LoadUserGrid();
-           
+
         }
     }
 

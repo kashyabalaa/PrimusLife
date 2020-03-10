@@ -1,33 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Configuration;
-using System.Data.SqlClient;
-using System.Data;
-using Telerik.Web.UI;
-using System.Globalization;
-
-using iTextSharp.text;
+﻿using iTextSharp.text;
 using iTextSharp.text.html.simpleparser;
-using iTextSharp.text.pdf;
-
-using System.Web.UI.HtmlControls;
-
-using System.Text;
-using System.Net.Mail;
-
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
+using System;
+using System.Data;
+using System.Data.SqlClient;
 //using System.Security.Cryptography.Xml;
-using System.Net;
-using System.Net.Security;
-using System.Diagnostics;
 using System.IO;
-
-using System.ComponentModel;
 
 
 
@@ -54,7 +31,7 @@ public partial class MenuIngredientEst : System.Web.UI.Page
             LoadTitle();
 
             DateTime now = DateTime.Now;
-           
+
 
 
             dtpmenuforday.SelectedDate = DateTime.Now;
@@ -132,7 +109,7 @@ public partial class MenuIngredientEst : System.Web.UI.Page
         }
     }
 
-    protected void btnSearch_Click(object sender,EventArgs e)
+    protected void btnSearch_Click(object sender, EventArgs e)
     {
         tblBDet.Visible = true;
         pnlShowDet.Visible = true;
@@ -140,7 +117,7 @@ public partial class MenuIngredientEst : System.Web.UI.Page
         LoadSessionDetails(Convert.ToDateTime(dtpmenuforday.SelectedDate), ddlDinersSession.SelectedValue);
         LoadRawMaterial(Convert.ToDateTime(dtpmenuforday.SelectedDate), ddlDinersSession.SelectedValue);
         GenerateProductWiseReport(Convert.ToDateTime(dtpmenuforday.SelectedDate), ddlDinersSession.SelectedValue);
-        
+
     }
 
 
@@ -165,7 +142,7 @@ public partial class MenuIngredientEst : System.Web.UI.Page
                 rgDinersTotal.DataSource = string.Empty;
                 rgDinersTotal.DataBind();
             }
-            dsSessionDetails.Dispose();    
+            dsSessionDetails.Dispose();
         }
         catch (Exception ex)
         {
@@ -192,7 +169,7 @@ public partial class MenuIngredientEst : System.Web.UI.Page
                 rdgMenuDetails.DataSource = string.Empty;
                 rdgMenuDetails.DataBind();
             }
-            dsSessionDetails.Dispose();       
+            dsSessionDetails.Dispose();
         }
         catch (Exception ex)
         {
@@ -234,12 +211,12 @@ public partial class MenuIngredientEst : System.Web.UI.Page
         {
             string body = "", mailserver = "", pwd = "", sentby = "", user = "", mailBody = "";
             SqlConnection con = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["constring"].ToString());
-            SqlCommand cmd = new SqlCommand("SP_FetchMenuIngredForDay",con);
+            SqlCommand cmd = new SqlCommand("SP_FetchMenuIngredForDay", con);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("@iMode", 1);
             cmd.Parameters.Add("@Date", selectdate);
             cmd.Parameters.Add("@Session", Session);
-           
+
             SqlDataAdapter sda = new SqlDataAdapter(cmd);
             DataTable dtBooked = new DataTable();
             sda.Fill(dtBooked);
@@ -270,8 +247,8 @@ public partial class MenuIngredientEst : System.Web.UI.Page
             //    byte[] bytes = ms.ToArray();
 
             //    ms.Close();
-           
-           
+
+
 
 
             //}
@@ -304,7 +281,7 @@ public partial class MenuIngredientEst : System.Web.UI.Page
             //dynamic output = new FileStream(path, FileMode.Create);
 
 
-            
+
 
             //object sumValue = dtSales.Compute("SUM(VALUE)", "");
             //body = body + "<font face=\"verdana\" size=\"2\">";
@@ -325,8 +302,8 @@ public partial class MenuIngredientEst : System.Web.UI.Page
             ////string filename = "mngr_" + DateTime.Now.ToString("ddMMyyyy_hhmmss") + "_SalesReport.pdf";
             ////string path = @"D:\IFIPL Reports\" + filename;
             ////dynamic output = new FileStream(path, FileMode.Create);
-            
-            
+
+
             //StringReader sr = new StringReader(body);
             //Document pdfDoc = new Document(PageSize.A4, 20f, 25f, 30f, 40f);
             //HTMLWorker htmlParser = new HTMLWorker(pdfDoc);
@@ -379,7 +356,7 @@ public partial class MenuIngredientEst : System.Web.UI.Page
             //        myMail.CC.Add("thangavel@innovatussystems.com");
             //        myMail.CC.Add("vivek@innovatussystems.com");
             //        myMail.Bcc.Add("murugan@innovatussystems.com");
-            //        myMail.Bcc.Add("varadharaj@innovatussystems.com");
+            //        myMail.Bcc.Add("balasubramani@innovatussystems.com");
 
             //        myMail.Subject = "Sales report " + DateTime.Now.ToString("dd-MMM-yyyy");
             //        mailBody = "<p style=\"font-family: Verdana;font-size:12px;color:#0B53B8\">Dear All,<br/>&nbsp;&nbsp;&nbsp;Please find attached the PDF version of product-wise sales report as on " + DateTime.Now.ToString("dd-MMM-yyyy hh:mm tt") + ".<br/><br/>This is an autogenerated mail from MDCK system.</p>";

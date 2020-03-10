@@ -1,20 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Web;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Net.Mail;
+using System.Text;
+using System.Threading;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-using System.Data;
-using System.Text;
-using System.Web.Services;
-using System.Web.Script.Services;
-using System.Configuration;
-using System.Net.Mail;
-using System.IO;
-using Telerik.Web.UI;
-using System.Threading;
 using System.Windows.Forms;
-using System.Net;
+using Telerik.Web.UI;
 
 public partial class Notice : System.Web.UI.Page
 {
@@ -45,14 +41,14 @@ public partial class Notice : System.Web.UI.Page
             if (qstring.ToString() == "AddEvent")
             {
                 lbtnAdd_Click(sender, null);
-                LoadGridAll();               
+                LoadGridAll();
                 FromDate.MinDate = DateTime.Today;
                 RadDatePicker1.MinDate = DateTime.Today;
 
                 FromDate.SelectedDate = DateTime.Today;
                 RadDatePicker1.SelectedDate = DateTime.Today;
             }
-           
+
             if (qstring.ToString() == "ViewEventsList")
             {
                 lbtnAll_Click(sender, null);
@@ -109,9 +105,9 @@ public partial class Notice : System.Web.UI.Page
         return flag;
     }
 
-   
+
     private void LoadGrid()
-    {        
+    {
         try
         {
             SqlCommand cmd = new SqlCommand("Proc_Events", con);
@@ -120,7 +116,7 @@ public partial class Notice : System.Web.UI.Page
 
             SqlDataAdapter dap = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
-            dap.Fill(ds, "temp");           
+            dap.Fill(ds, "temp");
             radgvEvents.MasterTableView.GetColumn("Remarks").Display = false;
             radgvEvents.DataSource = ds.Tables[0];
             radgvEvents.DataBind();
@@ -130,11 +126,11 @@ public partial class Notice : System.Web.UI.Page
 
         }
         LoadTitle(43);
-        strLastEvent = "Oncoming";       
+        strLastEvent = "Oncoming";
     }
 
     private void LoadGridOnCmng()
-    {       
+    {
         try
         {
             SqlCommand cmd = new SqlCommand("Proc_Events", con);
@@ -143,7 +139,7 @@ public partial class Notice : System.Web.UI.Page
 
             SqlDataAdapter dap = new SqlDataAdapter(cmd);
             DataSet ds = new DataSet();
-            dap.Fill(ds, "temp");           
+            dap.Fill(ds, "temp");
             radgvEvents.MasterTableView.GetColumn("Status").Display = false;
             radgvEvents.MasterTableView.GetColumn("Remarks").Display = false;
             radgvEvents.DataSource = ds.Tables[0];
@@ -157,7 +153,7 @@ public partial class Notice : System.Web.UI.Page
 
 
         LoadTitle(43);
-        strLastEvent = "Oncoming";       
+        strLastEvent = "Oncoming";
     }
 
     private void LoadTitle(int id)
@@ -209,14 +205,14 @@ public partial class Notice : System.Web.UI.Page
             DataSet ds = new DataSet();
             dap.Fill(ds, "temp");
             if (ds.Tables[0].Rows.Count > 0)
-            {                
+            {
                 radgvEvents.MasterTableView.GetColumn("Status").Display = true;
                 radgvEvents.MasterTableView.GetColumn("Remarks").Display = false;
                 radgvEvents.DataSource = ds.Tables[0];
                 radgvEvents.DataBind();
             }
             else
-            {                
+            {
                 radgvEvents.DataSource = null;
                 radgvEvents.DataBind();
             }
@@ -418,7 +414,7 @@ public partial class Notice : System.Web.UI.Page
             SqlCommand cmd = new SqlCommand(string.Concat("SELECT * FROM cpmailcredentials"), con);
             SqlDataAdapter da = new SqlDataAdapter(cmd);
             DataSet dsCredential = new DataSet();
-            da.Fill(dsCredential);    
+            da.Fill(dsCredential);
 
             MailMessage msg = new MailMessage();
 
@@ -489,7 +485,7 @@ public partial class Notice : System.Web.UI.Page
 
         }
 
-    }   
+    }
 
     private void Refresh()
     {
@@ -499,7 +495,7 @@ public partial class Notice : System.Web.UI.Page
     }
 
     protected void gvEvents_PageIndexChanging(object sender, GridViewPageEventArgs e)
-    {        
+    {
         if (strLastEvent == "OnComing")
         {
             LoadGrid();
@@ -643,7 +639,7 @@ public partial class Notice : System.Web.UI.Page
         {
             //LoadGrid();
             //LoadGridOnCmng();
-            LoadGridAll();       
+            LoadGridAll();
             this.ModalPopupExtender2.Hide();
             //Response.Redirect("Events.aspx?Type=OncomingEvent");
             //LoadGrid();          
@@ -753,7 +749,7 @@ public partial class Notice : System.Web.UI.Page
     protected void btnCancel_Click(object sender, EventArgs e)
     {
         //LoadGrid();
-        LoadGridAll();       
+        LoadGridAll();
         this.ModalPopupExtender1.Hide();
         //Response.Redirect("Events.aspx?Type=OncomingEvent");
 

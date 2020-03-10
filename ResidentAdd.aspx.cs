@@ -1,23 +1,19 @@
+using OfficeOpenXml;
 using System;
-using System.Collections.Generic;
+using System.Data;
+using System.Data.OleDb;
+using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.Mail;
+using System.Reflection;
+using System.Text;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
-using System.Data.SqlClient;
-using System.Configuration;
-using System.Globalization;
-using System.Drawing;
 using Telerik.Web.UI;
-using Excel = Microsoft.Office.Interop.Excel;
-using System.Runtime.InteropServices;
-using OfficeOpenXml;
-using System.IO;
-using System.Data.OleDb;
-using System.Text;
-using System.Reflection;
-using System.Net.Mail;
 
 public partial class _Default : System.Web.UI.Page
 {
@@ -238,7 +234,7 @@ public partial class _Default : System.Web.UI.Page
                                      );
                 SendMail();
                 ClearScr();
-                LoadGrid();                
+                LoadGrid();
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('Resident detail saved successfully,Please Check Your E-Mail to do further details.');", true);
                 ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('DoorNo Status has been changed to Occupied! , If you want to change the status please change.');", true);
             }
@@ -249,7 +245,7 @@ public partial class _Default : System.Web.UI.Page
         }
     }
     private void SendMail()
-    {      
+    {
         try
         {
             System.Web.HttpResponse Response = System.Web.HttpContext.Current.Response;
@@ -286,27 +282,29 @@ public partial class _Default : System.Web.UI.Page
                 ID = ds.Tables[0].Rows[0]["FromID"].ToString();
                 ComName = ds.Tables[0].Rows[0]["communityName"].ToString();
             }
-            SqlCommand com1 = new SqlCommand(string.Concat("select RTRSN,GLAccount,GlDepositAccount from tblResident where RTNAME='" + RTName.Text + "' and RTVillano='" + ddlvillano.SelectedValue + "'"), con);
+
+            SqlCommand com1 = new SqlCommand(string.Concat("select RTRSN,Contactmail ID,GLAccount,GlDepositAccount from tblResident where RTNAME='" + RTName.Text + "' and RTVillano='" + ddlvillano.SelectedValue + "'"), con);
             SqlDataAdapter dat1 = new SqlDataAdapter(com1);
             DataSet ds1 = new DataSet();
             dat1.Fill(ds1);
             // Write an informational entry to the event log.  
             string GLAcc = "";
-            string DepAc="";
+            string DepAc = "";
             string RSN = "";
+
             if (ds1 != null && ds1.Tables.Count > 0)
             {
                 GLAcc = ds1.Tables[0].Rows[0]["GLAccount"].ToString();
                 DepAc = ds1.Tables[0].Rows[0]["GlDepositAccount"].ToString();
                 RSN = ds1.Tables[0].Rows[0]["RTRSN"].ToString();
-            }
 
+            }
             SmtpClient mySmtpClient = new SmtpClient(mailserver, 587);
-            MailAddress From = new MailAddress(user, "info@innovatussystems.com");
+            MailAddress From = new MailAddress(user, "Primus Lifespaces Pvt. Ltd.");
             MailMessage myMail = new System.Net.Mail.MailMessage();
             myMail.From = From;
             myMail.To.Add(ID);
-            //myMail.CC.Add("bhaktha.n@primuslife.in ");
+            myMail.CC.Add("bhaktha.n@primuslife.in");
             mySmtpClient.UseDefaultCredentials = false;
             System.Net.NetworkCredential basicauth = new System.Net.NetworkCredential(user, pwd);
             mySmtpClient.Credentials = basicauth;
@@ -321,26 +319,26 @@ public partial class _Default : System.Web.UI.Page
             StringBuilder sbBody = new StringBuilder();
             sbBody.Append("<table width='100%' cellspacing='5' cellpadding='5' style='font-family:Verdana;font-size:14px;'>");
             sbBody.Append("<tr><td><b> Dear Sir/Madam ,</b></td></tr>");
-            sbBody.Append("<tr><td>Let us welcome new resident <b>"+ RTName.Text+"</b>");
+            sbBody.Append("<tr><td>Let us welcome new resident <b>" + RTName.Text + "</b>");
             sbBody.Append("</td></tr>");
             //sbBody.Append("<tr><td>Name :<b>"+ RTName.Text+"</b>");
             //sbBody.Append("</td></tr>");
             sbBody.Append("<tr><td>Door No. :<b>" + ddlvillano.SelectedValue + "</b></td></tr>");
             sbBody.Append("<tr><td>Status :<b>" + ddlstatus.Text.ToString() + "</b></td></tr>");
-            sbBody.Append("<tr><td>GL Account for transactions :<b>"+GLAcc+ "</b>");
+            sbBody.Append("<tr><td>GL Account for transactions :<b>" + GLAcc + "</b>");
             sbBody.Append("</td></tr>");
             sbBody.Append("<tr><td>GL Account for Deposits :<b>" + DepAc + "</b>");
             sbBody.Append("</td></tr>");
-            sbBody.Append("<tr><td>Important special attribute codes(Profile ++ codes), for you to fill them up.Please set <b>DININGAT</b> Code.</td></tr>");          
+            sbBody.Append("<tr><td>Important special attribute codes(Profile ++ codes), for you to fill them up. Please set <b>DININGAT</b> Code.</td></tr>");
             sbBody.Append("<tr><td>You may also have to post financial transactions for the resident (Deposits, Initial credits etc.)</td></tr>");
-            sbBody.Append("<tr><td>Remember to fill any missing information to take full advantage of ORIS.</td></tr>");          
-            sbBody.Append("<tr><td>Resident Unique ID : <b>"+RSN+"</b>");
+            sbBody.Append("<tr><td>Remember to fill any missing information to take full advantage of ORIS.</td></tr>");
+            sbBody.Append("<tr><td>Resident Unique ID : <b>" + RSN + "</b>");
             sbBody.Append("</td></tr>");
             sbBody.Append("<tr><td> Auto generated message from ORIS");
             sbBody.Append("</td></tr>");
             sbBody.Append("<tr><td><b>" + ComName + "</b></td></tr>");
-            sbBody.Append("<tr><td></td></tr>");           
-            sbBody.Append("</table>"); 
+            sbBody.Append("<tr><td></td></tr>");
+            sbBody.Append("</table>");
             myMail.IsBodyHtml = true;
             myMail.Subject = "Resident profile added for " + RTName.Text;
             myMail.Body = sbBody.ToString();
@@ -433,7 +431,7 @@ public partial class _Default : System.Web.UI.Page
 
         da.Fill(dsGrid);
         if (dsGrid != null && dsGrid.Tables.Count > 0 && dsGrid.Tables[0].Rows.Count > 0)
-        {            
+        {
 
             dtExcel = dsGrid.Tables[0];
             rcntgrdView.DataSource = dsGrid.Tables[0];
@@ -1149,16 +1147,16 @@ public partial class _Default : System.Web.UI.Page
         }
         else
             if (lnkAddnewCustomer.Text == "Close")
-            {
-                Tbladdcust.Visible = false;
+        {
+            Tbladdcust.Visible = false;
 
-                lnkAddnewCustomer.Text = "+ Add a New Profile";
-                lnkAddnewCustomer.ToolTip = "Click here to add a new profile.";
+            lnkAddnewCustomer.Text = "+ Add a New Profile";
+            lnkAddnewCustomer.ToolTip = "Click here to add a new profile.";
 
-                PnlLevelS.Visible = true;
+            PnlLevelS.Visible = true;
 
 
-            }
+        }
     }
 
     protected void LoadStatusCount()
@@ -1346,9 +1344,9 @@ public partial class _Default : System.Web.UI.Page
             {
                 //if (item["SDescription"].Text.Equals("Owner Resident Dependent") || item["SDescription"].Text.Equals("Owner Away Dependent") ||
                 //   item["SDescription"].Text.Equals("Tenant Dependant") || item["SDescription"].Text.Equals("Tenant Dependant Away") || item["SDescription"].Text.Equals("Vacant"))
-                    if (item["RTSTATUS"].Text.Equals("ORD") || item["RTSTATUS"].Text.Equals("OAD") ||
-                   item["RTSTATUS"].Text.Equals("TD") || item["RTSTATUS"].Text.Equals("TDA"))
-                    {
+                if (item["RTSTATUS"].Text.Equals("ORD") || item["RTSTATUS"].Text.Equals("OAD") ||
+               item["RTSTATUS"].Text.Equals("TD") || item["RTSTATUS"].Text.Equals("TDA"))
+                {
 
                     LinkButton lnk = (LinkButton)item.FindControl("lbtnName");
                     lnk.Enabled = false;
@@ -1562,6 +1560,17 @@ public partial class _Default : System.Web.UI.Page
         methodInfo.Invoke(ScriptManager.GetCurrent(Page),
             new object[] { sender as UpdatePanel });
     }
+    private void KillSpecificExcelFileProcess()
+    {
+        foreach (Process clsProcess in Process.GetProcesses())
+        {
+            if (clsProcess.ProcessName.Equals("EXCEL"))
+            {
+                clsProcess.Kill();
+                break;
+            }
+        }
+    }
     protected void btnexcelimport_Click(object sender, EventArgs e)
     {
         SqlProcsNew sqlobj = new SqlProcsNew();
@@ -1585,7 +1594,11 @@ public partial class _Default : System.Web.UI.Page
             string strfiletype = Path.GetExtension(fuExcel.FileName).ToLower();
             string strPath = string.Concat(Server.MapPath("~/Excel/" + fuExcel.FileName));
             FileInfo filepath = new FileInfo(strPath);
-            //filepath.Delete();
+            if (System.IO.File.Exists(strPath))
+            {
+                KillSpecificExcelFileProcess();
+                filepath.Delete();
+            }
             fuExcel.PostedFile.SaveAs(strPath);
 
             if (strfiletype == ".xls")
@@ -2055,7 +2068,7 @@ public partial class _Default : System.Web.UI.Page
                                           new SqlParameter() { ParameterName = "@Remarks", SqlDbType = SqlDbType.NVarChar, Value = null },
                                            new SqlParameter() { ParameterName = "@GLDepAcc", SqlDbType = SqlDbType.NVarChar, Value = Session["GLDepAcc"].ToString() },
                                           new SqlParameter() { ParameterName = "@GLAcc", SqlDbType = SqlDbType.NVarChar, Value = Session["GLAcc"].ToString() },
-                                           new SqlParameter() { ParameterName = "@EntryBy", SqlDbType = SqlDbType.NVarChar, Value = Session["UserID"].ToString() },                                          
+                                           new SqlParameter() { ParameterName = "@EntryBy", SqlDbType = SqlDbType.NVarChar, Value = Session["UserID"].ToString() },
                                          new SqlParameter() { ParameterName = "@Images", Direction = ParameterDirection.Input, SqlDbType = SqlDbType.NVarChar, Value = "" },
                                          new SqlParameter() { ParameterName = "@ImagePath", Direction = ParameterDirection.Input, SqlDbType = SqlDbType.NVarChar, Value = "NULL" },
                                          new SqlParameter() { ParameterName = "@FBilling", SqlDbType = SqlDbType.NVarChar, Value = "N" });
@@ -2415,7 +2428,7 @@ public partial class _Default : System.Web.UI.Page
     {
         try
         {
-            if(chkSameDetails.Checked==true)
+            if (chkSameDetails.Checked == true)
             {
                 txtOffEmailId.Text = Contactmail.Text;
                 txtOffMobNo.Text = Contactcellno.Text;

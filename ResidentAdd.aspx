@@ -426,7 +426,7 @@ function DependentGender() {
                             <tr>
 
                                 <td>
-                                    <telerik:RadWindowManager ID="rwImport" runat="server">
+                                    <telerik:RadWindowManager ID="rwImport" runat="server" Width="339px">
                                         <Windows>
                                             <telerik:RadWindow ID="rwImportExcel" Title="Imports Residents Details" BackColor="Beige" runat="server" Modal="true" Height="250px" Width="500px">
                                                 <ContentTemplate>
@@ -983,9 +983,6 @@ function DependentGender() {
                                             <td>
                                                 <asp:TextBox ID="RTAddress2" runat="Server" MaxLength="80" ToolTip="Enter Occupant address for contact." Width="350px" Height="40px" CssClass="form-controlForResidentAdd" ForeColor=" DarkBlue" Font-Names="Verdana" Font-Size="Small"></asp:TextBox>
                                             </td>
-                                        </tr>
-                                        <tr>
-                                           
                                         </tr>
                                         <tr>
                                             <td>

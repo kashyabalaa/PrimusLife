@@ -98,6 +98,9 @@
             font-size: 12px;
             /*vertical-align: middle;*/
         }
+        .auto-style1 {
+            width: 226px;
+        }
     </style>
 
 </asp:Content>
@@ -319,7 +322,7 @@
                                                                     <td>
                                                                         <asp:Label ID="lblfordate" runat="Server" Text="Date" ForeColor=" Black " Font-Names="Verdana" Font-Size="Small"></asp:Label>
                                                                     </td>
-                                                                    <td>
+                                                                    <td class="auto-style1">
                                                                         <telerik:RadDatePicker ID="dtpfordate" runat="server" Culture="English (United Kingdom)" Font-Names="Verdana" Font-Size="Small"
                                                                             Width="190px" CssClass="form-control" ReadOnly="true" ToolTip="Select the date in the future, for which you wish to do the booking. " AutoPostBack="true">
                                                                             <Calendar UseRowHeadersAsSelectors="False" UseColumnHeadersAsSelectors="False" ViewSelectorText="x"
@@ -339,7 +342,7 @@
                                                                     <td>
                                                                         <asp:Label ID="Label60" runat="Server" Text="Menu Item" ForeColor=" Black " Font-Names="Calibri" Font-Size="Medium "></asp:Label>
                                                                     </td>
-                                                                    <td>
+                                                                    <td class="auto-style1">
                                                                         <asp:DropDownList ID="ddlItemName" ToolTip="Select the menu item available for this session." Width="150px" CssClass="form-control" runat="server" AutoPostBack="true"
                                                                             Font-Names="Calibri" Font-Size="Small">
                                                                         </asp:DropDownList>
@@ -358,7 +361,7 @@
                                                                         <asp:Label ID="Label61" runat="Server" Text="Rate" Enabled="false" ForeColor=" Black " Font-Names="Calibri" Font-Size="Medium "></asp:Label>
                                                                     </td>
 
-                                                                    <td>
+                                                                    <td class="auto-style1">
                                                                         <asp:TextBox ID="txtBMRate" runat="Server" MaxLength="12" ToolTip="The Rate for the menu item set earlier." Width="150px" CssClass="form-control" ForeColor="Black" Font-Names="Verdana" Font-Size="Small" onkeypress="return isNumberKey(event);" ></asp:TextBox>
                                                                         <asp:Label ID="lbloriginalrate" runat="Server" Text="" ForeColor="DarkBlue" BackColor="Yellow" Font-Names="Calibri" Font-Size="Small"></asp:Label>
                                                                     </td>
@@ -389,7 +392,7 @@
                                                                     <td>
                                                                         <asp:Label ID="Label63" runat="Server" Text="Quantity/Person" ForeColor=" Black " Font-Names="Calibri" Font-Size="Medium "></asp:Label>
                                                                     </td>
-                                                                    <td>
+                                                                    <td class="auto-style1">
                                                                         <%-- <asp:TextBox ID="txtBMQuantity" runat="Server" MaxLength="12" ToolTip="How much to order per person?" Width="150px" Height="25px" ForeColor="Black" Font-Names="Verdana" Font-Size="Small" AutoPostBack="true" OnTextChanged="txtBMQuantity_TextChanged"></asp:TextBox>--%>
                                                                         <asp:DropDownList ID="ddlBMQuantiry" ToolTip="How many diners?(Residents and Guests).Shows the count of residents in the same doorno, By default." Width="150px" CssClass="form-control" runat="server" AutoPostBack="true"
                                                                             Font-Names="Calibri" Font-Size="Small" OnSelectedIndexChanged="ddlBMQuantiry_SelectedIndexChanged">
@@ -414,7 +417,7 @@
                                                                     <td>
                                                                         <asp:Label ID="Label92" runat="Server" Text="Total Qty" ForeColor=" Black " Font-Names="Calibri" Font-Size="Medium "></asp:Label>
                                                                     </td>
-                                                                    <td>
+                                                                    <td class="auto-style1">
                                                                         <asp:TextBox ID="txtBMTotQty" runat="Server" MaxLength="12" ToolTip="How much quantity of food to be eat." Width="150px" CssClass="form-control" ForeColor="Black" Font-Names="Verdana" Font-Size="Small" onkeypress="return isNumberKey(event);" ReadOnly="true"></asp:TextBox>
 
                                                                     </td>
@@ -434,7 +437,7 @@
                                                                     <td>
                                                                         <asp:Label ID="Label64" runat="Server" Text="Net Amount" ForeColor=" Black " Font-Names="Calibri" Font-Size="Medium "></asp:Label>
                                                                     </td>
-                                                                    <td>
+                                                                    <td class="auto-style1">
                                                                         <asp:TextBox ID="txtBMAmounttopay" Enabled="false" runat="Server" MaxLength="12" ToolTip="(Rate * No of persons * Quantity +(CGST+SGST)) " Width="150px" CssClass="form-control" ForeColor="Black" Font-Names="Verdana" Font-Size="Small"></asp:TextBox>
 
                                                                     </td>

@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Web;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.Threading;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-using System.Data;
-using System.Text;
-using System.Web.Services;
-using System.Web.Script.Services;
-using System.Configuration;
-using System.Net.Mail;
-using System.IO;
-using Telerik.Web.UI;
-using System.Threading;
 using System.Windows.Forms;
-using System.Net;
+using Telerik.Web.UI;
 
 public partial class NewCalendar : System.Web.UI.Page
 {
@@ -47,7 +39,7 @@ public partial class NewCalendar : System.Web.UI.Page
                 btnUpdate.Visible = false;
                 btnAddEvent.Visible = true;
 
-                
+
             }
         }
         catch (Exception ex)
@@ -92,13 +84,13 @@ public partial class NewCalendar : System.Web.UI.Page
         //TillDate.SelectedDate = DateTime.Now;
         txtEventName.Text = string.Empty;
         txtdesc.Text = string.Empty;
-        
+
         txtEventName.Focus();
 
         btnUpdate.Visible = false;
         btnAddEvent.Visible = true;
 
-        
+
     }
 
     public static void EventMail(string EventName, string Description, DateTime fromeventdate, DateTime toevnetdate)
@@ -200,10 +192,10 @@ public partial class NewCalendar : System.Web.UI.Page
         if (radgvEvents.Visible == true && radgvEvents.Items.Count > 0)
         {
 
-         
-           radgvEvents.ExportSettings.FileName = "Calendar";
-           radgvEvents.MasterTableView.Caption = "<span><br>List of Calendars</span>";
-          
+
+            radgvEvents.ExportSettings.FileName = "Calendar";
+            radgvEvents.MasterTableView.Caption = "<span><br>List of Calendars</span>";
+
 
             radgvEvents.ExportSettings.IgnorePaging = true;
             radgvEvents.ExportSettings.OpenInNewWindow = true;
@@ -285,7 +277,7 @@ public partial class NewCalendar : System.Web.UI.Page
                            new SqlParameter() { ParameterName = "@Description", SqlDbType = SqlDbType.NVarChar, Value = txtdesc.Text },
                            new SqlParameter() { ParameterName = "@EventType", SqlDbType = SqlDbType.NVarChar, Value = "C" },
                            new SqlParameter() { ParameterName = "@Status", SqlDbType = SqlDbType.NVarChar, Value = "00" },
-                           new SqlParameter() { ParameterName = "@IsSentMail", SqlDbType = SqlDbType.NVarChar, Value ="false"},
+                           new SqlParameter() { ParameterName = "@IsSentMail", SqlDbType = SqlDbType.NVarChar, Value = "false" },
                            new SqlParameter() { ParameterName = "@Images", SqlDbType = SqlDbType.NVarChar, Value = "" }
                            );
 
@@ -407,7 +399,7 @@ public partial class NewCalendar : System.Web.UI.Page
                     btnUpdate.Visible = true;
                     btnAddEvent.Visible = false;
 
-                    
+
                 }
             }
             drselect.Close();
@@ -461,7 +453,7 @@ public partial class NewCalendar : System.Web.UI.Page
                               new SqlParameter() { ParameterName = "@EventType", SqlDbType = SqlDbType.NVarChar, Value = "C" },
                               new SqlParameter() { ParameterName = "@Status", SqlDbType = SqlDbType.NVarChar, Value = "00" },
                               new SqlParameter() { ParameterName = "@IsSentMail", SqlDbType = SqlDbType.NVarChar, Value = "false" },
-                              new SqlParameter() { ParameterName = "@Images", SqlDbType = SqlDbType.NVarChar, Value = ""},
+                              new SqlParameter() { ParameterName = "@Images", SqlDbType = SqlDbType.NVarChar, Value = "" },
                               new SqlParameter() { ParameterName = "@Remarks", SqlDbType = SqlDbType.NVarChar, Value = "" },
                               new SqlParameter() { ParameterName = "@RSN", SqlDbType = SqlDbType.NVarChar, Value = Session["RSN"].ToString() }
                               );

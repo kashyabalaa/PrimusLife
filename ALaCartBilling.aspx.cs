@@ -345,6 +345,8 @@ public partial class ALaCartBilling : System.Web.UI.Page
             rgBookingameal.DataBind();
             cmbResident.Enabled = true;
             /// btnpaynow.Visible = false;
+            /// Added by Bala on 26.02.2020
+            ViewState["dt"] = null;
         }
         catch (Exception ex)
         {
@@ -440,7 +442,7 @@ public partial class ALaCartBilling : System.Web.UI.Page
             txtBMAmounttopay.Text = "";
             txtBMRate.Text = "";
             txtBMTotQty.Text = "";
-            cmbResident.Enabled = false;
+            cmbResident.Enabled = true;
             WebMsgBox.Show("Don't forget to click save button, After finished selection.");
 
         }
@@ -449,11 +451,6 @@ public partial class ALaCartBilling : System.Web.UI.Page
             WebMsgBox.Show(ex.Message);
         }
     }
-
-
-
-
-
     protected void btnPreparetobill_Click(object sender, EventArgs e)
     {
         try
@@ -582,7 +579,6 @@ public partial class ALaCartBilling : System.Web.UI.Page
             WebMsgBox.Show(ex.Message);
         }
     }
-
     protected void cmbResident_SelectedIndexChanged(object sender, RadComboBoxSelectedIndexChangedEventArgs e)
     {
         DataSet dsDetails;
@@ -747,14 +743,11 @@ public partial class ALaCartBilling : System.Web.UI.Page
             WebMsgBox.Show(ex.Message.ToString());
         }
     }
-
     protected void btnSearch_Click(object sender, EventArgs e)
     {
         rwDinCount.Visible = true;
         LoadCount();
     }
-
-
     protected void ChkGR_SelectedIndexChanged(object sender, EventArgs e)
     {
         try
@@ -770,9 +763,6 @@ public partial class ALaCartBilling : System.Web.UI.Page
     {
         LoadResidentDet();
     }
-
-
-
     protected void chkTCM_CheckedChanged(object sender, EventArgs e)
     {
         LoadMenus();

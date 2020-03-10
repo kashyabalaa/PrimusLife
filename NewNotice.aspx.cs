@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Web;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
+using System.IO;
+using System.Text;
+using System.Threading;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data.SqlClient;
-using System.Data;
-using System.Text;
-using System.Web.Services;
-using System.Web.Script.Services;
-using System.Configuration;
-using System.Net.Mail;
-using System.IO;
-using Telerik.Web.UI;
-using System.Threading;
 using System.Windows.Forms;
-using System.Net;
+using Telerik.Web.UI;
 
 public partial class NewNotice : System.Web.UI.Page
 {
@@ -43,7 +37,7 @@ public partial class NewNotice : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('" + ex.Message.ToString() + "');", true);       
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('" + ex.Message.ToString() + "');", true);
         }
     }
 
@@ -62,7 +56,7 @@ public partial class NewNotice : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('" + ex.Message.ToString() + "');", true);       
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('" + ex.Message.ToString() + "');", true);
         }
     }
 
@@ -80,7 +74,7 @@ public partial class NewNotice : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('" + ex.Message.ToString() + "');", true);       
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('" + ex.Message.ToString() + "');", true);
         }
     }
     protected void btnAddClear_Click(object sender, EventArgs e)
@@ -90,7 +84,7 @@ public partial class NewNotice : System.Web.UI.Page
     private void clear()
     {
 
-        FromDate.SelectedDate = DateTime.Now;      
+        FromDate.SelectedDate = DateTime.Now;
         txtEventName.Text = string.Empty;
         txtdesc.Text = string.Empty;
         txtEventName.Focus();
@@ -173,7 +167,7 @@ public partial class NewNotice : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('" + ex.Message.ToString() + "');", true);       
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('" + ex.Message.ToString() + "');", true);
         }
     }
 
@@ -181,9 +175,9 @@ public partial class NewNotice : System.Web.UI.Page
     {
         if (radgvEvents.Visible == true && radgvEvents.Items.Count > 0)
         {
-            radgvEvents.ExportSettings.ExportOnlyData = true;           
-                radgvEvents.ExportSettings.FileName = "Notice";
-                radgvEvents.MasterTableView.Caption = "<span><br>List of acitve notice</span>";      
+            radgvEvents.ExportSettings.ExportOnlyData = true;
+            radgvEvents.ExportSettings.FileName = "Notice";
+            radgvEvents.MasterTableView.Caption = "<span><br>List of acitve notice</span>";
             radgvEvents.ExportSettings.IgnorePaging = true;
             radgvEvents.ExportSettings.OpenInNewWindow = true;
             radgvEvents.MasterTableView.ExportToExcel();
@@ -220,7 +214,7 @@ public partial class NewNotice : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('" + ex.Message.ToString() + "');", true);       
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('" + ex.Message.ToString() + "');", true);
         }
     }
 
@@ -248,7 +242,7 @@ public partial class NewNotice : System.Web.UI.Page
                     {
                         File = "";
                     }
-                }           
+                }
                 sqlobj.ExecuteNonQuery("Proc_Events", new SqlParameter() { ParameterName = "@i", SqlDbType = SqlDbType.Int, Value = 2 },
                            new SqlParameter() { ParameterName = "@Fromdate", SqlDbType = SqlDbType.DateTime, Value = FromDate.SelectedDate.Value },
                            new SqlParameter() { ParameterName = "@Tilldate", SqlDbType = SqlDbType.DateTime, Value = FromDate.SelectedDate.Value },
@@ -257,7 +251,7 @@ public partial class NewNotice : System.Web.UI.Page
                            new SqlParameter() { ParameterName = "@EventType", SqlDbType = SqlDbType.NVarChar, Value = "I" },
                            new SqlParameter() { ParameterName = "@Status", SqlDbType = SqlDbType.NVarChar, Value = "00" },
                            new SqlParameter() { ParameterName = "@IsSentMail", SqlDbType = SqlDbType.NVarChar, Value = chkIsSentMail.Checked.ToString() },
-                           new SqlParameter() { ParameterName = "@Images", SqlDbType = SqlDbType.NVarChar, Value = File == "" ? null:File }
+                           new SqlParameter() { ParameterName = "@Images", SqlDbType = SqlDbType.NVarChar, Value = File == "" ? null : File }
                            );
                 //DateTime fdate = Convert.ToDateTime(FromDate.SelectedDate.Value);
                 //DateTime tdate = Convert.ToDateTime(FromDate.SelectedDate.Value);
@@ -271,7 +265,7 @@ public partial class NewNotice : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('" + ex.Message.ToString()+ "');", true);            
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('" + ex.Message.ToString() + "');", true);
         }
     }
     protected void btnAddCancel_Click(object sender, EventArgs e)
@@ -301,7 +295,7 @@ public partial class NewNotice : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('" + ex.Message.ToString() + "');", true);       
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('" + ex.Message.ToString() + "');", true);
         }
     }
     protected void radgvEvents_ItemDataBound(object sender, GridItemEventArgs e)
@@ -410,7 +404,7 @@ public partial class NewNotice : System.Web.UI.Page
                     FileUpd.SaveAs(Server.MapPath(@"~//EventImages/") + strfile.ToString());
                 }
 
-                
+
 
                 string rsn = Session["RSN"].ToString();
 
@@ -422,7 +416,7 @@ public partial class NewNotice : System.Web.UI.Page
                               new SqlParameter() { ParameterName = "@EventType", SqlDbType = SqlDbType.NVarChar, Value = "E" },
                               new SqlParameter() { ParameterName = "@Status", SqlDbType = SqlDbType.NVarChar, Value = ddlupstatus.SelectedValue },
                               new SqlParameter() { ParameterName = "@IsSentMail", SqlDbType = SqlDbType.NVarChar, Value = chkIsSentMail.Checked.ToString() },
-                              new SqlParameter() { ParameterName = "@Images", SqlDbType = SqlDbType.NVarChar, Value = File == "" ? null:File },
+                              new SqlParameter() { ParameterName = "@Images", SqlDbType = SqlDbType.NVarChar, Value = File == "" ? null : File },
                               new SqlParameter() { ParameterName = "@Remarks", SqlDbType = SqlDbType.NVarChar, Value = "" },
                               new SqlParameter() { ParameterName = "@RSN", SqlDbType = SqlDbType.NVarChar, Value = Session["RSN"].ToString() }
                               );
@@ -437,7 +431,7 @@ public partial class NewNotice : System.Web.UI.Page
         }
         catch (Exception ex)
         {
-            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('"+ex.Message.ToString()+"');", true);
+            ScriptManager.RegisterStartupScript(this.Page, this.Page.GetType(), "alert", "alert('" + ex.Message.ToString() + "');", true);
         }
     }
 
@@ -463,7 +457,7 @@ public partial class NewNotice : System.Web.UI.Page
         catch (Exception ex)
         {
 
-        }       
+        }
     }
     protected void radgvEvents_Init(object sender, EventArgs e)
     {
@@ -472,7 +466,7 @@ public partial class NewNotice : System.Web.UI.Page
         while (i < menu.Items.Count)
         {
             if (menu.Items[i].Text == "NoFilter" || menu.Items[i].Text == "Contains")
-            
+
             {
                 i++;
             }
