@@ -70,7 +70,7 @@ public class Invoice
                     }
 
                     SmtpClient mySmtpClient = new SmtpClient(mailserver, 587);
-                    MailAddress From = new MailAddress(user, "info@innovatussystems.com");
+                    MailAddress From = new MailAddress(user, "Services@primuslife.in");
                     MailMessage myMail = new System.Net.Mail.MailMessage();
                     myMail.From = From;
                     myMail.To.Add(Email);
@@ -190,11 +190,6 @@ public class Invoice
                                 sb1.Append("</td>");
                                 sb1.Append("</tr>");
                                 sb1.Append("</table><br/>");
-
-
-
-
-
                                 sb1.Append("<table border = '1' width='100%' BORDERCOLOR='#c6ccce' style='margin-left:15px;'>");
                                 sb1.Append("<tr >");
 

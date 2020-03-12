@@ -262,6 +262,51 @@ public class SqlProcsNew
 
         }
     }
+    public DataTable ExecuteSP_DT(string spName, params DbParameter[] arguments)
+    {
+        clcommon objclcommon = new clcommon();
+        Database db = DatabaseFactory.CreateDatabase("constring");
+        DbCommand dbCommand = null;
+        DataTable dt = new DataTable();
+
+        InOutParameters = new Dictionary<string, DbParameter>();
+        try
+        {
+            if (objclcommon.databasetype().Trim() == "SQL")
+            {
+                dbCommand = db.GetStoredProcCommand(spName);
+                for (int i = 0; i < arguments.Length; i++)
+                {
+                    dbCommand.Parameters.Add(arguments[i]);
+                }
+                dbCommand.CommandTimeout = 0;
+                DbDataReader drd =(DbDataReader) db.ExecuteReader(dbCommand);
+                dt.Load(drd);
+                
+            }
+            foreach (DbParameter para in dbCommand.Parameters)
+            {
+                if ((para.Direction == ParameterDirection.Output) || (para.Direction == ParameterDirection.InputOutput))
+                {
+                    InOutParameters.Add(para.ParameterName, para);
+                }
+            }
+            return dt;
+        }
+        catch (Exception sqe)
+        {
+            throw new Exception(sqe.Message.ToString());
+            return null;
+        }
+        finally
+        {
+            objclcommon = null;
+            db = null;
+            dt.Dispose();
+            dbCommand.Dispose();
+
+        }
+    }
 
     public int ExecuteNonQuery(string spName, DbTransaction dbTran, params DbParameter[] arguments)
     {

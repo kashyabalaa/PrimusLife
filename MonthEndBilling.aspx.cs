@@ -392,10 +392,10 @@ public partial class MonthEndBilling : System.Web.UI.Page
             sbBody.Append("<tr><td></td></tr>");
             sbBody.Append("<tr><td>Sincerely yours,");
             sbBody.Append("</td></tr>");
-            sbBody.Append("<tr><td>Innovatus Systems");
+            sbBody.Append("<tr><td>Primus Lifespaces Pvt. Ltd.,");
             sbBody.Append("</td></tr>");
-            sbBody.Append("<tr><td>Phone:422-2604370</td></tr>");
-            sbBody.Append("<tr><td>Email:Info@innvoatussystems.com</td></tr>");
+            sbBody.Append("<tr><td>Phone:080-46461900</td></tr>");
+            sbBody.Append("<tr><td>Email:Services@primuslife.in</td></tr>");
             sbBody.Append("</table>");
             StringReader sr = new StringReader(sb.ToString());
             Document pdfDoc = new Document(PageSize.A4, 50f, 20f, 40f, 50f);
@@ -438,11 +438,11 @@ public partial class MonthEndBilling : System.Web.UI.Page
                 //myMail.To.Add("balasubramani@innovatussystems.com");
 
                 SmtpClient mySmtpClient = new SmtpClient(mailserver, 587);
-                MailAddress From = new MailAddress(user, "info@innovatussystems.com");
+                MailAddress From = new MailAddress(user, "Primus Lifespaces Pvt. Ltd.,");
                 MailMessage myMail = new System.Net.Mail.MailMessage();
                 myMail.From = From;
                 //myMail.To.Add("rangan@innovatussystems.com");
-                myMail.To.Add("balasubramani@innovatussystems.com");
+                myMail.To.Add("Resident mail address");
                 //myMail.CC.Add("rangan@innovatussystems.com");
 
                 //foreach (DataRow row in dsMails.Tables[0].Rows)

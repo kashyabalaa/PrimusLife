@@ -526,7 +526,7 @@ public partial class Events : System.Web.UI.Page
                 //myMail.Body = myString.ToString();
                 //mySmtpClient.Send(myMail);
 
-                sqlobj.ExecuteNonQuery("insert into tblCSoftMailOutBox(FromUser,Touser,CC,Subject,Body) values('" + dsMails.Tables[1].Rows[0][0].ToString() + "','" + dsMails.Tables[1].Rows[0][0].ToString() + "','" + strCC + "','" + Subject + "','" + myString.ToString() + "')");
+                sqlobj.ExecuteNonQuery("insert into tblCSoftMailOutBox(FromUser,Touser,CC,Subject,Body) values('" + dsMails.Tables[1].Rows[0][0].ToString() + "','" + dsMails.Tables[0].Rows[0][0].ToString() + "','" + strCC + "','" + Subject + "','" + myString.ToString() + "')");
             }            
         }
         catch (SmtpException ex)

@@ -33,7 +33,9 @@ public partial class Healthchart : System.Web.UI.Page
         {
             dsChartData = GetChartData();
 
-            strScript.Append(@"<script type='text/javascript'>  
+            if (dsChartData != null && dsChartData.Rows.Count > 0)
+            {
+                strScript.Append(@"<script type='text/javascript'>  
                     google.load('visualization', '1', {packages: ['corechart']});</script>  
   
                     <script type='text/javascript'>  
@@ -41,19 +43,22 @@ public partial class Healthchart : System.Web.UI.Page
                     var data = google.visualization.arrayToDataTable([  
                     ['Health Watch', 'Male', 'Female'],");
 
-            foreach (DataRow row in dsChartData.Rows)
-            {
-                strScript.Append("['" + row["Health Watch"] + "'," + row["M"] + "," +
-                    row["F"] + "],");
+                foreach (DataRow row in dsChartData.Rows)
+                {
+                    strScript.Append("['" + row["Health Watch"] + "'," + row["M"] + "," +
+                        row["F"] + "],");
+                }
+                strScript.Remove(strScript.Length - 1, 1);
+                strScript.Append("]);");
+
+                strScript.Append("var options = { title : 'Health Watch Chart as of " + dt + " ', vAxis: {title: 'Count'},   hAxis: {title: 'Health Watch'}, seriesType: 'bars', series: {3: {type: 'area'}} };");
+                strScript.Append(" var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));  chart.draw(data, options); } google.setOnLoadCallback(drawVisualization);");
+                strScript.Append(" </script>");
+
+                ltrscr.Text = strScript.ToString();
             }
-            strScript.Remove(strScript.Length - 1, 1);
-            strScript.Append("]);");
-
-            strScript.Append("var options = { title : 'Health Watch Chart as of " + dt + " ', vAxis: {title: 'Count'},   hAxis: {title: 'Health Watch'}, seriesType: 'bars', series: {3: {type: 'area'}} };");
-            strScript.Append(" var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));  chart.draw(data, options); } google.setOnLoadCallback(drawVisualization);");
-            strScript.Append(" </script>");
-
-            ltrscr.Text = strScript.ToString();
+            else { ltrscr.Text = "No such data Exists!..."; }
+            
         }
         catch
         {
@@ -80,9 +85,9 @@ public partial class Healthchart : System.Web.UI.Page
 
             sqlCon.Close();
         }
-        catch
+        catch(Exception ex)
         {
-            throw;
+            WebMsgBox.Show(ex.Message);
         }
         return dsData.Tables[0];
     }

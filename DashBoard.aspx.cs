@@ -585,6 +585,7 @@ public partial class DashBoard : System.Web.UI.Page
             lblDoorNo.Text = dsUsers.Tables[0].Rows[0]["DoorNo"].ToString() + " - " + dsUsers.Tables[0].Rows[0]["status"].ToString();
             lblBlockName.Text = dsUsers.Tables[0].Rows[0]["BlockName"].ToString();
         }
+        rwDetails.Visible = true;
     }
     protected void gvVilla_ItemCommand(object sender, GridCommandEventArgs e)
     {
@@ -726,7 +727,7 @@ public partial class DashBoard : System.Web.UI.Page
                 rgRenewal.DataSource = string.Empty;
                 rgRenewal.DataBind();
             }
-
+         
             dsRenewal.Dispose();
         }
         catch (Exception ex)
@@ -768,6 +769,7 @@ public partial class DashBoard : System.Web.UI.Page
                     itm.Cells[3].ForeColor = System.Drawing.Color.Maroon;
                     itm.Cells[3].BackColor = System.Drawing.Color.Yellow;
                     itm.Cells[3].Font.Bold = true;
+                    rgRenewal.DataBind();
                 }                
             }
 
