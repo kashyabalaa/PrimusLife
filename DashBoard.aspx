@@ -155,6 +155,7 @@
 
                                                                 </Columns>
                                                             </MasterTableView>
+                                                              <HeaderStyle BackColor="#831251" />
                                                         </telerik:RadGrid>
                                                     </td>
                                                 </tr>
@@ -292,6 +293,7 @@
                                                                 <telerik:GridBoundColumn HeaderText="Sqr. Ft." HeaderStyle-Width="100px" DataField="SqrFeet" ReadOnly="true" AllowFiltering="true" FilterControlWidth="60px"></telerik:GridBoundColumn>
                                                             </Columns>
                                                         </MasterTableView>
+                                                          <HeaderStyle BackColor="#831251" />
                                                     </telerik:RadGrid>
 
                                                 </td>
@@ -334,6 +336,7 @@
 
                                                             </Columns>
                                                         </MasterTableView>
+                                                          <HeaderStyle BackColor="#831251" />
                                                     </telerik:RadGrid>
 
                                                 </td>
