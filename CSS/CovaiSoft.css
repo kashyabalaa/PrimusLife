@@ -11,17 +11,16 @@
 	width:90%;
 	margin:0 auto;
 }
-.HD
-{
-	background-color:#831251;
-	min-height:90px;
-	width:98%;
-	padding:10px 10px ;
-	color:White;
-	border-radius:5px;
-	font-style:normal;
-	font-family:Calibri;
-    font-size:large;
+.HD {
+    background-color: #831251;
+    min-height: 90px;
+    width: 98%;
+    padding: 10px 10px;
+    color: White;
+    border-radius: 5px;
+    font-style: normal;
+    font-family: Calibri;
+    font-size: large;
 }
 
 
@@ -52,9 +51,7 @@ border-radius:8px;
        
 
 }
-.Grid_Header_Background_Color {
-background-color:#831251;
-}
+
 
 
 	
