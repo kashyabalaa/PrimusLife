@@ -19,7 +19,7 @@
             window.open("Age.aspx");
         }
 
-    </script>
+    </script> 
 
     <style type="text/css">
         .occupiedbutton {
