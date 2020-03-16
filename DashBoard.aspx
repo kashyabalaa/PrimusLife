@@ -403,9 +403,10 @@
                                                     <td style="width: 15px"></td>
                                                     <td>
                                                         <telerik:RadGrid ID="rdgResidentDet" GroupingSettings-CaseSensitive="false" Skin="WebBlue" AllowSorting="true" runat="server" AutoGenerateColumns="false" Height="500px" Width="1100px" AllowFilteringByColumn="true"
-                                                            OnItemCommand="rdgResidentDet_ItemCommand" OnItemDataBound="rdgResidentDet_ItemDataBound" OnPreRender="rdgResidentDet_PreRender" OnItemCreated="RadGrid1_ItemCreated" OnInit="rdgResidentDet_Init">
+                                                            OnItemCommand="rdgResidentDet_ItemCommand" OnItemDataBound="rdgResidentDet_ItemDataBound" OnPreRender="rdgResidentDet_PreRender" OnItemCreated="RadGrid1_ItemCreated" OnInit="rdgResidentDet_Init" CssClass="CovaiSoft.css">
                                                             <%--HeaderStyle-BackColor="#008b8b"  HeaderStyle-ForeColor="White" FilterItemStyle-BackColor="#008b8b" PagerStyle-BackColor="Wheat" PagerStyle-BorderColor="Yellow" PagerStyle-ForeColor="Black"--%>
                                                             <%--Skin="Metro"--%>
+                                                       
 
                                                             <GroupingSettings CaseSensitive="False" />
 
@@ -547,11 +548,11 @@
                                                                         <HeaderStyle HorizontalAlign="Left" Width="100px" />
                                                                         <ItemStyle HorizontalAlign="Left" Width="100px" />
                                                                     </telerik:GridTemplateColumn>
-
-
+                                                                   
                                                                 </Columns>
+                                                                <HeaderStyle CssClass="CovaiSoft.css" BackColor="#831251" />
                                                             </MasterTableView>
-                                                            <HeaderStyle BackColor="#831251" />
+                                                            
                                                         </telerik:RadGrid>
 
 
