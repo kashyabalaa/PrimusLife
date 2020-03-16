@@ -268,7 +268,7 @@
                                                     <asp:Label ID="lblshow" runat="server" Font-Names="verdana" ForeColor="Maroon" Font-Size="Medium" Font-Bold="true" Text="-"></asp:Label>
                                                 </td>
                                             </tr>
-                                            <tr>
+                                            <tr> 
                                                 <td style="vertical-align: top; width: 60%">
                                                     <br />
                                                     <telerik:RadGrid ID="gvVilla" GroupingSettings-CaseSensitive="false" Skin="WebBlue" AllowSorting="true" runat="server" AutoGenerateColumns="false" Height="350px"
