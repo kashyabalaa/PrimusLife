@@ -29,7 +29,7 @@
     <style type="text/css">
         .RadGrid th.rgHeader {
             background-image: none;
-            background-color: #196F3D;
+          
             color: white;
             font-weight: bold;
         }
@@ -155,7 +155,7 @@
 
                                                                 </Columns>
                                                             </MasterTableView>
-                                                              <HeaderStyle BackColor="#831251" />
+                                                              
                                                         </telerik:RadGrid>
                                                     </td>
                                                 </tr>
