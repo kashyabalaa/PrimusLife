@@ -549,8 +549,6 @@
                                                                 </Columns>
                                                             </MasterTableView>
                                                         </telerik:RadGrid>
-
-
                                                     </td>
                                                 </tr>
                                             </table>
