@@ -14,7 +14,7 @@
     .RadGrid th.rgHeader
     {
         background-image: none;
-        background-color: #196F3D;
+        background-color: #831251;
         color:white;
         font-weight:bold;
     }
@@ -218,7 +218,9 @@
                     </tr>
                     <tr>
 
-                        <td style="width: 50%;vertical-align:top">
+                        <td style="                                width: 50%;
+                                vertical-align: top
+                        ">
 
                              <telerik:RadGrid ID="rgGroupwiseTotal" runat="server" AllowPaging="false" CssClass="RadGridCustomClass"  AutoPostBack="true"
                                 AutoGenerateColumns="False"  AllowSorting="True" ShowFooter="true"

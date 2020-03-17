@@ -29,7 +29,7 @@
     <style type="text/css">
         .RadGrid th.rgHeader {
             background-image: none;
-            background-color: #7049BA;
+            background-color: #831251;
             color: white;
             font-weight: bold;
         }

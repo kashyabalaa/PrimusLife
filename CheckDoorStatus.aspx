@@ -5,7 +5,7 @@
     <style type="text/css">
         .RadGrid th.rgHeader {
             background-image: none;
-            background-color: #196F3D;
+            background-color: #831251;
             color: white;
             font-weight: bold;
         }
@@ -14,18 +14,18 @@
         .rightAlign { text-align:right; }
     </style>
     <style type="text/css">
-        
-.Loadingdiv {
-     position: fixed;
-    z-index: 999;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    background-color: Black;
-    filter: alpha(opacity=60);
-    opacity: 0.6;
-    -moz-opacity: 0.8;
-}
+
+        .Loadingdiv {
+            position: fixed;
+            z-index: 999;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            background-color: Black;
+            filter: alpha(opacity=60);
+            opacity: 0.6;
+            -moz-opacity: 0.8;
+        }
 
 .centerdiv
 {
