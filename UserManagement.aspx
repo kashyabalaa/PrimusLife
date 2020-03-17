@@ -157,7 +157,7 @@
         }
         .RadGrid th.rgHeader {
             background-image: none;
-            background-color: #196F3D;
+            background-color: #831251;
             color: white;
             font-weight: bold;
         }
